@@ -1,0 +1,29 @@
+<?php
+
+class Facility_model extends CI_Model
+{
+  
+	private $_table = 'tb_fasilitas';
+
+		public function get_all(){
+		$query = $this->db->get($this->_table);
+		return $query->result();
+	}
+	
+	public function get_by_id($id_fasilitas){
+		$query = $this->db->get_where($this->_table, $id_fasilitas);
+		return $query->result();
+	}
+	public function input_data($data,$_table){
+		$this->db->insert($this->_table, $data);
+	}
+	public function hapus_data($where){
+		$this->db->where($where);
+		return $this->db->delete($this->_table);
+	}
+ 
+    function update_fasilitas($data,$where){
+		$this->db->where($where);
+        return $this->db->update($this->_table,$data,$where);
+    }
+}
